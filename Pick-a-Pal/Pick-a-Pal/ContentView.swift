@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var names: [String] = ["Elisa", "Andre", "Jasmine", "Po-Chun"]
+    @State private var nameToAdd: String = ""
+    
     var body: some View {
         VStack {
             List {
@@ -16,6 +18,15 @@ struct ContentView: View {
                     Text(name)
                 }
             }
+            
+            TextField("Add name", text: $nameToAdd)
+                .autocorrectionDisabled()
+                .onSubmit {
+                    if !nameToAdd.isEmpty {
+                        names.append(nameToAdd)
+                        nameToAdd = ""
+                    }
+                }
         }
         .padding()
     }

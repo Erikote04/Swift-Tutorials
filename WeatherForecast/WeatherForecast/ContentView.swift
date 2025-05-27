@@ -9,16 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack {
-            DayForecast(day: "Mon", isRainy: false, high: 70, low: 50)
-            DayForecast(day: "Tue", isRainy: true, high: 60, low: 40)
+        ZStack {
+            VStack {
+                Spacer()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        DayForecast(day: "Mon", isRainy: true, high: 60, low: 40)
+                        DayForecast(day: "Tues", isRainy: false, high: 80, low: 60)
+                        DayForecast(day: "Wed", isRainy: false, high: 70, low: 50)
+                        DayForecast(day: "Thurs", isRainy: true, high: 60, low: 40)
+                        DayForecast(day: "Fri", isRainy: true, high: 50, low: 30)
+                        DayForecast(day: "Sat", isRainy: false, high: 60, low: 40)
+                        DayForecast(day: "Sun", isRainy: false, high: 70, low: 50)
+                    }
+                }
+                
+                WeekForecast()
+                
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
+        .background(.blue.gradient, ignoresSafeAreaEdges: .all)
     }
-}
-
-#Preview {
-    ContentView()
 }
 
 struct DayForecast: View {
@@ -54,5 +68,38 @@ struct DayForecast: View {
                 .fontWeight(.medium)
         }
         .padding()
+        .background(.ultraThinMaterial, in: .rect(cornerRadius: 8))
     }
+}
+
+struct WeekForecast: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Week Forecast")
+                .font(.title)
+            
+            Text("May 26th - June 1nd")
+                .font(.caption)
+            
+            HStack(spacing: 8) {
+                VStack(alignment: .leading) {
+                    Text("Average high: 65º")
+                    Text("Average low: 45º")
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Sunny days: 4")
+                    Text("Rainy days: 3")
+                }
+            }
+            .padding(.vertical, 8)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(.ultraThinMaterial, in: .rect(cornerRadius: 8))
+    }
+}
+
+#Preview {
+    ContentView()
 }

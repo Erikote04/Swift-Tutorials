@@ -78,7 +78,7 @@ struct WeekForecast: View {
             Text("Week Forecast")
                 .font(.title)
             
-            Text("May 26th - June 1nd")
+            Text("May 26th - June 1st")
                 .font(.caption)
             
             HStack(spacing: 8) {

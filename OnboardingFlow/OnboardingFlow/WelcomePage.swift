@@ -17,6 +17,7 @@ struct WelcomePage: View {
             Text("Welcome to My App")
                 .font(.title)
                 .fontWeight(.semibold)
+                .padding(.top)
                 .border(.black, width: 1.5)
             
             Text("Description text")

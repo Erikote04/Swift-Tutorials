@@ -35,7 +35,7 @@ struct ContentView: View {
             
             Toggle("Remove when picked", isOn: $shouldRemovePickedName)
             
-            Button("Pick Random Name") {
+            Button {
                 if let randomName = names.randomElement() {
                     pickedName = randomName
                     
@@ -45,7 +45,13 @@ struct ContentView: View {
                 } else {
                     pickedName = ""
                 }
+            } label: {
+                Text("Pick Random Name")
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
             }
+            .buttonStyle(.borderedProminent)
+            .font(.title2)
         }
         .padding()
     }

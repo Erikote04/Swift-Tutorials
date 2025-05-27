@@ -28,6 +28,7 @@ struct ContentView: View {
                         numberOfDice -= 1
                     }
                 }
+                .symbolRenderingMode(.multicolor)
                 .disabled(numberOfDice == 1)
                 
                 Button("Add Dice", systemImage: "plus.circle.fill") {
@@ -36,6 +37,7 @@ struct ContentView: View {
                     }
                 }
                 .disabled(numberOfDice == 5)
+                .symbolRenderingMode(.multicolor)
             }
             .padding()
             .labelStyle(.iconOnly)
@@ -44,7 +46,6 @@ struct ContentView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.appBackground)
-        .tint(.white)
     }
 }
 

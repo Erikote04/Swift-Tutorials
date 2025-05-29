@@ -9,13 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var scoreboard = ScoreBoard()
-    private var startingPoints = 0
+    @State private var startingPoints = 0
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Score Keeper")
                 .font(.title.bold())
                 .padding(.bottom)
+            
+            SettingsView(startingPoints: $startingPoints)
             
             Grid {
                 GridRow {

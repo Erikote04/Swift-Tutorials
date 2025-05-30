@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Friends", systemImage: "person.and.person") {
-                Text("Friends")
+                FriendList()
             }
             
             Tab("Movies", systemImage: "film.stack") {
@@ -23,4 +23,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: Friend.self, inMemory: true)
 }

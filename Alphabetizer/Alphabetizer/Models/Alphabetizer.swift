@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class Alphabetizer {
     private let tileCount = 3
     private var vocab: Vocabulary
@@ -16,6 +17,7 @@ class Alphabetizer {
     
     init(vocab: Vocabulary = .oceanAnimals) {
         self.vocab = vocab
+        startNewGame()
     }
     
     /// Checks if tiles are in alphabetical order

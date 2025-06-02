@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct WordCanvas: View {
-    @State private var tiles: [Tile] = [
-        Tile(word: "First"),
-        Tile(word: "Second"),
-        Tile(word: "Third")
-    ]
+    @Environment(Alphabetizer.self) private var alphabetizer
+    
+    private var tiles: [Tile] {
+        alphabetizer.tiles
+    }
 
     var body: some View {
         ZStack {
@@ -17,7 +17,7 @@ struct WordCanvas: View {
                         .frame(width: Tile.placeholderSize, height: Tile.placeholderSize)
                 }
             }
-            ForEach($tiles) { $tile in
+            ForEach(tiles) { tile in
                 TileView(tile: tile)
                     .offset(tile.centeredOffset)
                     .gesture(DragGesture().onChanged { value in
@@ -34,6 +34,7 @@ struct WordCanvas: View {
 
 #Preview {
     WordCanvas()
+        .environment(Alphabetizer())
 }
 
 extension WordCanvas {

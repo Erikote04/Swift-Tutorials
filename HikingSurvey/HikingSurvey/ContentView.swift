@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var responses: [Response] = []
+    var scorer = Scorer()
+    
     var body: some View {
         VStack {
             Text("Opinions on Hiking")
@@ -24,11 +26,17 @@ struct ContentView: View {
         }
         .onAppear {
             for response in Response.sampleResponses {
-                responses.insert(Response(text: response), at: 0)
+                saveResponse(text: response)
             }
         }
         .padding(.horizontal)
         .background(Color(white: 0.95))
+    }
+    
+    func saveResponse(text: String) {
+        let score = scorer.score(text)
+        let response = Response(text: text, score: score)
+        responses.insert(response, at: 0)
     }
 }
 

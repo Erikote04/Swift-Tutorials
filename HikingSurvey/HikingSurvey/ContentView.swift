@@ -18,7 +18,7 @@ struct ContentView: View {
             
             ScrollView {
                 ForEach(responses) { response in
-                    Text(response.text)
+                    ResponseView(response: response)
                 }
             }
         }

@@ -5,13 +5,14 @@
 //  Created by Erik Sebastian de Erice Jerez on 5/6/25.
 //
 
+import Charts
 import Foundation
 import SwiftUI
 
-enum Sentiment {
-    case positive
-    case negative
-    case moderate
+enum Sentiment: String, Plottable {
+    case positive = "Positive"
+    case negative = "Negative"
+    case moderate = "Moderate"
     
     init(_ score: Double) {
         if score > 0.2 {

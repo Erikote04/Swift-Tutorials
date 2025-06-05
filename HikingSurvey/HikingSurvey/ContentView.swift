@@ -21,6 +21,8 @@ struct ContentView: View {
                 .padding(.top, 24)
             
             ScrollView {
+                ChartView(responses: responses)
+                
                 ForEach(responses) { response in
                     ResponseView(response: response)
                 }

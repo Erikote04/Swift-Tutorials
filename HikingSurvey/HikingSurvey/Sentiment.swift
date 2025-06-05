@@ -25,8 +25,8 @@ enum Sentiment {
     
     var icon: String {
         switch self {
-        case .positive: "chevron.up"
-        case .negative: "chevron.down"
+        case .positive: "chevron.up.2"
+        case .negative: "chevron.down.2"
         case .moderate: "minus"
         }
     }

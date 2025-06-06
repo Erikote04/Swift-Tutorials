@@ -9,7 +9,12 @@ import SwiftUI
 
 struct TextRecognitionView: View {
     let imageResource: ImageResource
+    let boundingColor = Color(red: 1.00, green: 0.00, blue: 0.85)
     @State private var textRecognizer: TextRecognizer?
+    
+    private var isProcessing: Bool {
+        textRecognizer == nil
+    }
     
     var body: some View {
         VStack {
@@ -20,10 +25,18 @@ struct TextRecognitionView: View {
                 .task {
                     textRecognizer = await TextRecognizer(imageResource: imageResource)
                 }
+                .overlay {
+                    if let observations = textRecognizer?.observations {
+                        ForEach(observations, id: \.self) { observation in
+                            BoundsRect(normalizedText: observation.boundingBox)
+                                .stroke(boundingColor, lineWidth: 3)
+                        }
+                    }
+                }
             
             Spacer()
             
-            TranslationView(text: textRecognizer?.recognizedText ?? "")
+            TranslationView(text: textRecognizer?.recognizedText ?? "", isProcessing: isProcessing)
         }
         .padding()
         .navigationTitle("Sign Info")

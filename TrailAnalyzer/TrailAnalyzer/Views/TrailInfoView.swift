@@ -12,34 +12,47 @@ struct TrailInfoView: View {
     
     var body: some View {
         VStack {
-            Text("Distance")
-            TextField("kilometers", value: $trailInfo.distance, format: .number)
-                .keyboardType(.numberPad)
+            TrailField(iconName: "figure.hiking", label: "Distance") {
+                TextField("kilometers", value: $trailInfo.distance, format: .number)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+            }
             
-            Text("Elevation")
-            TextField("meters", value: $trailInfo.elevation, format: .number)
-                .keyboardType(.numberPad)
+            TrailField(iconName: "mountain.2.fill", label: "Elevation Change") {
+                TextField("meters", value: $trailInfo.elevation, format: .number)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+            }
             
-            Text("Terrain")
-            Picker("Terrain", selection: $trailInfo.terrain) {
-                ForEach(Terrain.allCases, id: \.self) { terrain in
-                    Text(terrain.rawValue.capitalized).tag(terrain)
+            TrailField(iconName: "shoe.fill", label: "Terrain") {
+                Picker("Terrain", selection: $trailInfo.terrain) {
+                    ForEach(Terrain.allCases, id: \.self) { terrain in
+                        Text(terrain.rawValue.capitalized).tag(terrain)
+                    }
                 }
+                .tint(.black)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(.gray.opacity(0.15))
+                        .opacity(trailInfo.terrain == nil ? 0 : 1)
+                )
             }
-            .tint(.black)
             
-            Text("Danger from wildlife")
-            Picker("Danger from wildlife", selection: $trailInfo.wildlifeDangerLevel) {
-                Text("Low").tag(TrailInfo.lowDanger)
-                Text("High").tag(TrailInfo.highDanger)
+            TrailField(iconName: "exclamationmark.triangle.fill", label: "Danger from wildlife") {
+                Picker("Danger from wildlife", selection: $trailInfo.wildlifeDangerLevel) {
+                    Text("Low").tag(TrailInfo.lowDanger)
+                    Text("High").tag(TrailInfo.highDanger)
+                }
+                .frame(width: 110)
+                .pickerStyle(.segmented)
             }
-            .frame(width: 110)
-            .pickerStyle(.segmented)
         }
     }
 }
 
 #Preview {
     @Previewable @State var trailInfo = TrailInfo.empty
+    
     TrailInfoView(trailInfo: $trailInfo)
+        .trailTheme()
 }

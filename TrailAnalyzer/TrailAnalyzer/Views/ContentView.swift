@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var trailInfo = TrailInfo()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            ScrollView {
+                Text("Enter the data about your upcoming hike")
+                    .font(.subheadline.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom)
+                
+                TrailInfoView(trailInfo: $trailInfo)
+                
+                NavigationLink {
+                    let analyzer = TrailAnalyzer()
+                    let risk = analyzer.predictRisk(trailInfo: trailInfo)
+                    RiskCard(risk: risk)
+                } label: {
+                    Text("Submit")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(.tint, in: .rect(cornerRadius: 12))
+                        .foregroundStyle(.white)
+                }
+            }
+            .navigationTitle("Trail Analyzer")
+            .trailTheme()
         }
-        .padding()
+        .onAppear {
+            trailInfo = .sample
+        }
     }
 }
 

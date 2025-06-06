@@ -9,14 +9,22 @@ import Foundation
 import CoreML
 
 struct TrailAnalyzer {
-    func predictRisk() -> Risk {
+    func predictRisk(trailInfo: TrailInfo) -> Risk {
         do {
             let model = try TrailAnalyzerModel(configuration: MLModelConfiguration())
             
-            let input = TrailAnalyzerModelInput(distance: 1,
-                                                elevation: 0,
-                                                terrain: "paved",
-                                                dangerous: 0)
+            guard let distance = trailInfo.distance,
+                  let terrain = trailInfo.terrain else {
+                return .highRisk
+            }
+            
+            let input = TrailAnalyzerModelInput(
+                distance: Int64(distance),
+                elevation: Int64(trailInfo.elevation ?? 0),
+                terrain: terrain.rawValue,
+                dangerous: Int64(trailInfo.wildlifeDangerLevel)
+            )
+            
             let predictedRisk = try model.prediction(input: input).risk
             
             switch predictedRisk {

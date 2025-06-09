@@ -11,11 +11,11 @@ import RealityKitContent
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Model3D(named: "ToyBiplane", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
+        HStack(spacing: 50) {
+            Model3D(named: "ClamScene", bundle: realityKitContentBundle)
+            Model3D(named: "FishScene", bundle: realityKitContentBundle)
+            Model3D(named: "SlugScene", bundle: realityKitContentBundle)
+            Model3D(named: "StarfishScene", bundle: realityKitContentBundle)
         }
         .padding()
     }

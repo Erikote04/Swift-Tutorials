@@ -6,16 +6,24 @@
 //
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
 
 struct ContentView: View {
+    @State private var colors: [Color] = [.cyan, .blue]
+    
     var body: some View {
         VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
+            Grid {
+                GridRow {
+                    Text("Colors")
+                    
+                    HStack {
+                        ColorPicker("Color", selection: $colors[0])
+                        ColorPicker("Color", selection: $colors[1])
+                        Spacer()
+                    }
+                    .labelsHidden()
+                }
+            }
         }
         .padding()
     }

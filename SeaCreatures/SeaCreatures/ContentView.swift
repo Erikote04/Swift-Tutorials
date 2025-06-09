@@ -10,6 +10,7 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    @Environment(\.openWindow) private var openWindow
     @State private var selectedCreature: SeaCreature?
     
     private var seaCreatures = [
@@ -35,7 +36,7 @@ struct ContentView: View {
                     .navigationTitle(selectedCreature.name)
                     .toolbar {
                         Button {
-                            
+                            openWindow(id: "creatureWindow", value: selectedCreature.modelName)
                         } label: {
                             Text("View \(selectedCreature.name)")
                         }

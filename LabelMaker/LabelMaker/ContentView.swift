@@ -10,14 +10,11 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    @State private var label = Label()
+    
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
-        }
-        .padding()
+        LabelView(label: $label)
+            .padding()
     }
 }
 

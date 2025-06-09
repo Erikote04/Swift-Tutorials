@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct LabelView: View {
-    @State private var text = ""
+    @Binding var label: Label
     
     var body: some View {
-        TextField("Type to enter text", text: $text, axis: .vertical)
+        TextField("Type to enter text", text: $label.text, axis: .vertical)
             .frame(width: 500, height: 500)
             .padding()
-            .background(.blue, in: .rect(cornerRadius: 20))
+            .background(.blue, in: .rect(cornerRadius: label.cornerRadius))
             .foregroundStyle(.black)
             .font(.system(size: 40, weight: .semibold))
             .multilineTextAlignment(.center)
@@ -22,5 +22,6 @@ struct LabelView: View {
 }
 
 #Preview {
-    LabelView()
+    @Previewable @State var label = Label()
+    LabelView(label: $label)
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var colors: [Color] = [.cyan, .blue]
+    @State private var depth = 0.0
     
     let minDiameter = 50.0
     let diameterChange = 70.0
@@ -21,10 +22,19 @@ struct ContentView: View {
                         .stroke(lineWidth: 30)
                         .foregroundStyle(colors[index % colors.count])
                         .frame(height: minDiameter + diameterChange * Double(index))
+                        .padding3D(.back, depth)
                 }
             }
             
             Grid {
+                GridRow {
+                    Text("Depth")
+                    
+                    Slider(value: $depth, in: 0...50) {
+                        Text("Depth")
+                    }
+                }
+                
                 GridRow {
                     Text("Colors")
                     

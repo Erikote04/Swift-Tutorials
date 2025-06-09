@@ -10,6 +10,8 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    @State private var selectedCreature: SeaCreature?
+    
     private var seaCreatures = [
         SeaCreature(name: "Clam", modelName: "ClamScene"),
         SeaCreature(name: "Fish", modelName: "FishScene"),
@@ -18,13 +20,18 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        HStack(spacing: 50) {
-            Model3D(named: "ClamScene", bundle: realityKitContentBundle)
-            Model3D(named: "FishScene", bundle: realityKitContentBundle)
-            Model3D(named: "SlugScene", bundle: realityKitContentBundle)
-            Model3D(named: "StarfishScene", bundle: realityKitContentBundle)
+        NavigationSplitView {
+            List(seaCreatures) { creature in
+                Button {
+                    selectedCreature = creature
+                } label: {
+                    Text(creature.name)
+                }
+            }
+            .navigationTitle("Sea Creatures")
+        } detail: {
+            
         }
-        .padding()
     }
 }
 

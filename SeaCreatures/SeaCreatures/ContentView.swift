@@ -45,6 +45,7 @@ struct ContentView: View {
                 Text("Select a sea creature")
             }
         }
+        .frame(minWidth: 700, minHeight: 700)
     }
 }
 

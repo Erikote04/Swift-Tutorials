@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Label {
+struct Label: Codable, Hashable {
     var id = UUID()
     var text = ""
     var cornerRadius = 20.0

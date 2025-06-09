@@ -30,7 +30,19 @@ struct ContentView: View {
             }
             .navigationTitle("Sea Creatures")
         } detail: {
-            
+            if let selectedCreature {
+                Model3D(named: selectedCreature.modelName, bundle: realityKitContentBundle)
+                    .navigationTitle(selectedCreature.name)
+                    .toolbar {
+                        Button {
+                            
+                        } label: {
+                            Text("View \(selectedCreature.name)")
+                        }
+                    }
+            } else {
+                Text("Select a sea creature")
+            }
         }
     }
 }

@@ -9,9 +9,10 @@ import SwiftData
 import SwiftUI
 
 struct MomentsView: View {
-    @State private var isShowingCreateMoment = false
     @Query(sort: \Moment.timestamp)
     private var moments: [Moment]
+    
+    @State private var isShowingCreateMoment = false
     
     var body: some View {
         NavigationStack {
@@ -46,7 +47,11 @@ struct MomentsView: View {
     
     private var pathItems: some View {
         ForEach(moments) { moment in
-            Text(moment.title)
+            NavigationLink {
+                MomentDetailView(moment: moment)
+            } label: {
+                Text(moment.title)
+            }
         }
     }
 }

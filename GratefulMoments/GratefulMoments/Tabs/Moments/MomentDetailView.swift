@@ -45,9 +45,6 @@ struct MomentDetailView: View {
     
     private var contentStack: some View {
         VStack(alignment: .leading) {
-            Text(moment.timestamp, style: .date)
-                .font(.subheadline)
-            
             if !moment.note.isEmpty {
                 Text(moment.note)
                     .textSelection(.enabled)

@@ -44,16 +44,17 @@ struct MomentEntryView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add", systemImage: "checkmark") {
-                        let moment = Moment(
+                        let newMoment = Moment(
                             title: title,
                             note: note,
                             imageData: imageData,
                             timestamp: .now
                         )
                         
-                        dataContainer.context.insert(moment)
+                        dataContainer.context.insert(newMoment)
                         
                         do {
+                            try dataContainer.badgeManager.unlockBadges(newMoment: newMoment)
                             try dataContainer.context.save()
                             dismiss()
                         } catch {

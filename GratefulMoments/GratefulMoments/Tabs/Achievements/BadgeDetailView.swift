@@ -24,6 +24,11 @@ struct BadgeDetailView: View {
                 .font(.body)
             
             Spacer()
+            
+            if let timestamp = badge.timestamp {
+                Text(timestamp, style: .date)
+                    .font(.caption2.bold())
+            }
         }
         .padding()
         .frame(width: 320, height: 410)

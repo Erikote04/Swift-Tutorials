@@ -35,6 +35,16 @@ enum BadgeDetails: Int, Codable, CaseIterable {
         }
     }
     
+    var lockedImage: ImageResource {
+        switch self {
+        case .firstEntry: return .firstEntryLocked
+        case .fiveStars: return .fiveStarsLocked
+        case .shutterbug: return .shutterbugLocked
+        case .expressive: return .expressiveLocked
+        case .perfectTen: return .perfectTenLocked
+        }
+    }
+    
     var title: String {
         switch self {
         case .firstEntry: return "Start the Journey"

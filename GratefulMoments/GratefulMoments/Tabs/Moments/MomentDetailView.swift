@@ -36,15 +36,31 @@ struct MomentDetailView: View {
                 } message: {
                     Text("The moment will be permanently deleted. Earned badges won't be removed")
                 }
-
+                
             }
         }
         .navigationTitle(moment.title)
-        .navigationSubtitle(Text(moment.timestamp, style: .date))
     }
     
     private var contentStack: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text(moment.timestamp, style: .date)
+                    .font(.subheadline)
+                
+                Spacer()
+                
+                ForEach(moment.badges) { badge in
+                    NavigationLink {
+                        BadgeDetailView(badge: badge)
+                    } label: {
+                        Image(badge.details.image)
+                            .resizable()
+                            .frame(width: 44, height: 44)
+                    }
+                }
+            }
+            
             if !moment.note.isEmpty {
                 Text(moment.note)
                     .textSelection(.enabled)

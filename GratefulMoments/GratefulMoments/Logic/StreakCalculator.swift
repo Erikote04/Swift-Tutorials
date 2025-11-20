@@ -30,16 +30,22 @@ struct StreakCalculator {
         
         for daysAgo in daysAgoArray {
             if daysAgo == streak {
-                print("Streak already here. Don't increase the streak.")
+                // Streak already here; don't increase the streak.
+                // 5 posts in 1 day is a 1 streak. 5 posts in 2 days is a 2 streak.
                 continue
             } else if daysAgo == streak + 1 {
-                print("A moment exists the day after the current streak")
+                // A moment exists the day after the current streak, add to the streak
                 streak += 1
-                print("Increased streak to \(streak)")
             } else {
-                print("Streak of \(streak) broken with daysAgo \(daysAgo)")
+                // The streak breaks if jumping more than one day
                 break
             }
+        }
+        
+        // Streak is calculated above starting from yesterday. Not yet saving a moment today shouldn't break the streak.
+        // If a moment has been saved today, include it in the streak.
+        if daysAgoArray.first == 0 {
+            streak += 1
         }
         
         return streak

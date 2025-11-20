@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MomentHexagonView: View {
     var moment: Moment
+    
     @State var layout: HexagonLayout = .standard
+    
+    @Environment(\.locale) private var locale
     
     var body: some View {
         Hexagon(moment: moment, layout: layout) {
@@ -34,7 +37,7 @@ struct MomentHexagonView: View {
             }
             
             Text(moment.timestamp.formatted(
-                .dateTime
+                .dateTime.locale(locale)
                 .month(.abbreviated).day()
             ))
             .font(.footnote)
